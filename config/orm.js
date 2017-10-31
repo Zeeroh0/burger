@@ -84,8 +84,16 @@ const orm = {
 		});
 	},
 	deleteOne: function (table, condition, cb) {
-		let queryString = "UPDATE "+table;
+		let queryString = "DELETE FROM "+table;
 		queryString += " WHERE "+condition+";";
+
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+
+      cb(result);
+    });
 	}
 };
 
